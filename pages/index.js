@@ -5,6 +5,8 @@ import Nav from "./components/Nav";
 import NavItem from "./components/NavItem";
 import Bienvenida from "./components/Bienvenida";
 import Tienda from "./components/Tienda";
+import Footer from "./components/Footer";
+import Carrito from "./components/Carrito"
 
 export default function Home() {
   return (
@@ -24,12 +26,16 @@ export default function Home() {
         <NavLink to="/productos">
           <NavItem> Productos</NavItem>
         </NavLink>
+        <NavLink to="/carrito">
+          <NavItem> Carrito</NavItem>
+        </NavLink>
       </Nav>
 
       <main>
         <Routes>
           <Route exact path="/" element={<Bienvenida />} />
           <Route path="/productos" element={<Tienda />} />
+          <Route path="/carrito" element={<Carrito />} />
         </Routes>
       </main>
     </Router>
