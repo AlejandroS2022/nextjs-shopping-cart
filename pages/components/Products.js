@@ -1,7 +1,8 @@
 import { useSelector, useDispatch } from "react-redux"
-import { addToCart, decrement } from "../features/product/productSlice"
+import { addToCart, removeFromCart } from "../features/product/productSlice"
 import Image from "./Image"
 import ProductInfo from "./ProductInfo"
+import Footer from "./Footer";
 
 const Products = () => {
     const products = useSelector((state) => state.product.products);
@@ -18,15 +19,22 @@ const Products = () => {
                         <ProductInfo name={product.name} price={product.price} />
                         <div className="flex space-x-4 mb-6 mt-4 text-sm font-medium">
                             <div className="flex-auto flex space-x-4">
-                                <button className="h-10 px-6 font-semibold rounded-md border border-slate-200 text-slate-900 hover:bg-slate-300" type="button" onClick={() => dispatch(addToCart(product.id, product.name, product.price))}>
-                                    Agregar al carrito
+                                <button className="h-10 px-6 font-semibold rounded-md border border-green-500 text-green-500 hover:bg-green-500 hover:text-slate-100" type="button" onClick={() => dispatch(addToCart(product))}>
+                                    Agregar
                                 </button>
                                 { cart.length > 0 ? (
-                                    cart.map((prodCart, index) => {
+                                    cart.map((prodCart, index1) => {
                                         if (prodCart.id == product.id && prodCart.qty > 0) {
-                                            <button className="h-10 px-6 font-semibold rounded-md border border-slate-200 text-slate-900 hover:bg-slate-300" type="button" onClick={() => dispatch(increment(product.id, product.name, product.price))}>
-                                                Quitar del carrito
-                                            </button>
+                                            return(
+                                                <div key={index1}>
+                                                    <button className="h-10 px-6 font-semibold rounded-md border border-red-400 text-red-400 hover:bg-red-500 hover:text-slate-100" type="button" onClick={() => dispatch(removeFromCart(product))}>
+                                                        Quitar
+                                                    </button>
+                                                    <div className="w-full flex-none text-sm font-medium text-slate-700 mt-2">
+                                                        En el carrito: {prodCart.qty}
+                                                    </div>
+                                                </div>
+                                            );
                                         }
                                     })
                                 ) : (
@@ -38,6 +46,8 @@ const Products = () => {
                 </div>
             );
         })}
+        
+        <Footer />
         </>
     )
 }
