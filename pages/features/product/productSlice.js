@@ -6,7 +6,8 @@ const initialState = {
         { id: 2, img: './test2.jpg', name: 'producto 2', price: 50.00 },
         { id: 3, img: './test3.jpg', name: 'producto 3', price: 70.00 },
     ],
-    cart: []
+    cart: [],
+    total: 0.00
 }
 
 export const productSlice = createSlice({
@@ -20,6 +21,8 @@ export const productSlice = createSlice({
 
             if (state.cart.length === 0) {
                 state.cart = [{ id, name, price, qty: 1, sum: price }];
+
+                state.total = price;
             } else {
                 const newCart = state.cart;
                 const exists = newCart.filter(prod => {
@@ -35,12 +38,16 @@ export const productSlice = createSlice({
                             newCart[index] = {
                                 id, name, price, qty: qty + 1, sum: sum + price
                             };
+
+                            state.total += price;
                         }
                     });
                 } else {
                     newCart.push({
                         id, name, price, qty: 1, sum: price
                     });
+
+                    state.total += price;
                 }
 
                 state.cart = newCart;
@@ -69,8 +76,12 @@ export const productSlice = createSlice({
                             newCart[index] = {
                                 id, name, price, qty: qty - 1, sum: sum - price
                             };
+
+                            state.total -= price;
                         } else if (prod.id === id) {
                             newCart[index] = [];
+
+                            state.total -= price;
                         }
 
                         if (newCart[index].length != 0) {
