@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 
 const Carrito = () => {
     const cart = useSelector((state) => state.product.cart);
-    let total = 0;
+    const total = useSelector((state) => state.product.total);
 
     return(
         <>
@@ -17,10 +17,6 @@ const Carrito = () => {
                     </div>
                 </div>
             { cart.map((prodCart, index) => {
-                if (prodCart.id) {
-                    total += prodCart.sum;
-                }
-
                 return(
                     <div className="table-row" key={index}>
                         <div className="table-cell flex-initial mx-auto p-3">{prodCart.name}</div>
