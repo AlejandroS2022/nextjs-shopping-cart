@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { addToCart, removeFromCart } from "../features/product/productSlice"
-import Image from "./Image"
+import Img from "./Img"
 import ProductInfo from "./ProductInfo"
 import Footer from "./Footer";
 
@@ -14,10 +14,10 @@ const Products = () => {
         { products.map((product, index) => {
             return(
                 <div className="flex flex-initial font-sans p-3 m-2" key={index}>
-                    <Image imgSrc={product.img} />
+                    <Img imgSrc={product.img} />
                     <div className="flex-auto p-6">
                         <ProductInfo name={product.name} price={product.price} />
-                        <div className="flex space-x-4 mb-6 mt-4 text-sm font-medium">
+                        <div className="flex flex-wrap space-x-4 mb-6 mt-4 text-sm font-medium">
                             <div className="flex-auto flex space-x-4">
                                 <button className="h-10 px-6 font-semibold rounded-md border border-green-500 text-green-500 hover:bg-green-500 hover:text-slate-100" type="button" onClick={() => dispatch(addToCart(product))}>
                                     Agregar
