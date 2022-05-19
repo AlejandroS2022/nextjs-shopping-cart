@@ -13,7 +13,7 @@ const Products = () => {
         <>
         { products.map((product, index) => {
             return(
-                <div className="flex flex-initial font-sans p-3 m-2" key={index}>
+                <div className="flex-initial font-sans p-1 m-2 flow-root md:flex" key={index}>
                     <Img imgSrc={product.img} />
                     <div className="flex-auto p-6">
                         <ProductInfo name={product.name} price={product.price} />
